@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var hapticGenerator: HapticGenerator? = null
     private var player: MediaPlayer? = null
     private var fileUri: Uri? = null
+    private var playing = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +60,17 @@ class MainActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
         play.setOnClickListener {
-            browse.isEnabled = false
-            fileUri?.let { it1 -> play(it1) }
-            browse.isEnabled = true
+            if (playing) {
+                releasePlayer()
+                playing = false
+                play.text = getString(R.string.play)
+                browse.isEnabled = true
+            } else {
+                fileUri?.let { it1 -> play(it1) }
+                playing = true
+                play.text = getString(R.string.pause)
+                browse.isEnabled = false
+            }
         }
     }
 

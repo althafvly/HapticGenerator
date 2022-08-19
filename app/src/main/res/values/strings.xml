@@ -5,4 +5,5 @@
     <string name="haptic_not_supported">Haptic generator is not supported</string>
     <string name="play">Play</string>
     <string name="browse">Browse</string>
+    <string name="pause">Pause</string>
 </resources>
