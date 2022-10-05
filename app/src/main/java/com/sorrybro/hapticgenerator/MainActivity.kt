@@ -45,13 +45,14 @@ class MainActivity : AppCompatActivity() {
             textView.setText(R.string.haptic_not_supported)
             textView.setTextColor(Color.RED)
         }
-        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
-                fileUri = result.data?.data
-                fileName.text = getFileName(fileUri!!)
+        val resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    // There are no request codes
+                    fileUri = result.data?.data
+                    fileName.text = getFileName(fileUri!!)
+                }
             }
-        }
         browse.setOnClickListener {
             val chooseFile = Intent(Intent.ACTION_GET_CONTENT)
             chooseFile.addCategory(Intent.CATEGORY_OPENABLE)
