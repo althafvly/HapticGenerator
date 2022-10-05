@@ -27,3 +27,13 @@ jobs:
       with:
         report-path: app/build/reports/lint-results-debug.xml
       continue-on-error: false
+
+    - uses: marvinpinto/action-automatic-releases@latest
+      if: github.ref == 'refs/heads/master'
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: false
+        title: "${{ env.GITHUB_SHA }}"
+        files: |
+          app/build/outputs/apk/debug/app-debug.apk
