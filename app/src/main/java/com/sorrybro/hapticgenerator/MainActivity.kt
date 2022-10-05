@@ -9,9 +9,11 @@ import android.media.MediaPlayer
 import android.media.audiofx.HapticGenerator
 import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
 import android.provider.OpenableColumns
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
@@ -30,6 +32,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    private fun isBatterySaverOn(): Boolean {
+        val powerManager: PowerManager = getSystemService(POWER_SERVICE) as PowerManager
+        return powerManager.isPowerSaveMode
     }
 
     override fun onStart() {
@@ -61,6 +68,10 @@ class MainActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
         play.setOnClickListener {
+            if (isBatterySaverOn()) {
+                Toast.makeText(this, getString(R.string.power_save_on), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (playing) {
                 releasePlayer()
                 playing = false

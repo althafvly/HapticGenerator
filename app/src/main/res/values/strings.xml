@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Haptic Generator</string>
-    <string name="haptic_supported">Haptic generator supported</string>
-    <string name="haptic_not_supported">Haptic generator is not supported</string>
+    <string name="haptic_supported">Haptic generator supported.</string>
+    <string name="haptic_not_supported">Haptic generator is not supported.</string>
+    <string name="power_save_on">Turn off power save mode.</string>
     <string name="play">Play</string>
     <string name="browse">Browse</string>
     <string name="pause">Pause</string>
